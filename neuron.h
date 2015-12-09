@@ -12,6 +12,7 @@ public:
     Vector vector;
     float  quant = 0;
     QList<int> quant_list;
+    QList<QString> quant_names;
     bool   has_map = false;
     Map   *map = 0;
     Neuron(int vectorSize);

@@ -27,12 +27,14 @@ void Neuron::resetQuant()
 {
     quant = 0;
     quant_list.clear();
+    quant_names.clear();
 }
 
 void Neuron::addQuant(const Vector &v, int i)
 {
     quant += vector.distanceTo(v);
     quant_list.append(i);
+    if(v.has_name) quant_names.append(v.name);
 }
 
 void Neuron::print(bool printv) const
