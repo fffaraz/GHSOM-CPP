@@ -11,7 +11,6 @@ class GUI : public QObject
     Q_OBJECT
 public:
     explicit GUI(Map *map, QObject *parent = 0);
-    ~GUI();
 private:
     Map *map;
 private slots:

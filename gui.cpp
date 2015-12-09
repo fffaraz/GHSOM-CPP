@@ -29,9 +29,3 @@ void GUI::cellDoubleClicked(int r, int c)
     if(!map->network[r][c]->has_map) return;
     new GUI(map->network[r][c]->map, this);
 }
-
-GUI::~GUI()
-{
-
-}
-
