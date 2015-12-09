@@ -12,13 +12,13 @@ class Map
 public:
     Map(int vector_size, int init_r = 2, int init_c = 2);
     ~Map();
-    void print(int tab = 0) const;
+    void print(bool printv = false, int tab = 0) const;
     void train(const QList<Vector> &input, int max_iterations = 5000);
     Point findBestMatch(const Vector &v) const;
     QList<Point> findRecursive(const Vector &v) const;
+    QList<QList<Neuron*>> network;
 
 private:
-    QList<QList<Neuron*>> network;
     Vector mean;
     int iteration = 0;
     int input_size = 0;
@@ -36,9 +36,9 @@ private:
     int markAllHierarchyUnits();
 
 protected:
-    int   lambda = 500;
-    float tau_1 = 0.05;
-    float tau_2 = 0.01;
+    int   lambda = 50;
+    float tau_1 = 0.50;
+    float tau_2 = 0.50;
     float alpha() const;
     float theta(Point u, int x, int y) const;
 };

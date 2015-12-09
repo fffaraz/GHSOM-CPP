@@ -90,7 +90,8 @@ int Map::markAllHierarchyUnits()
     {
         for(int j = 0; j < network[i].size(); ++j)
         {
-            if(network[i][j]->quant > tau_2 && network[i][j]->has_map == false)
+            Neuron *ne = network[i][j];
+            if(ne->quant > tau_2 && ne->has_map == false && ne->quant_list.size() >= 4)
             {
                 num++;
                 network[i][j]->has_map = true;

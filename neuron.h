@@ -16,7 +16,7 @@ public:
     Map   *map = 0;
     Neuron(int vectorSize);
     ~Neuron();
-    void print() const;
+    void print(bool printv = true) const;
     void resetQuant();
     void addQuant(const Vector &v, int i);
     float distance(Neuron* other) const;

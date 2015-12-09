@@ -35,15 +35,19 @@ void Neuron::addQuant(const Vector &v, int i)
     quant_list.append(i);
 }
 
-void Neuron::print() const
+void Neuron::print(bool printv) const
 {
     cout << "(";
-    for(int i = 0; i < vector.size(); ++i)
+    if(printv)
     {
-        cout << fixed << setprecision(2) << vector[i];
-        if(i != vector.size() - 1) cout << ",";
+        for(int i = 0; i < vector.size(); ++i)
+        {
+            cout << fixed << setprecision(2) << vector[i];
+            if(i != vector.size() - 1) cout << ",";
+        }
+        cout << ";";
+        cout << fixed << setprecision(1) << quant << ",";
     }
-    cout << ";" << quant << ",";
     cout << quant_list.size();
     if(has_map) cout << "+";
     else cout << "_";

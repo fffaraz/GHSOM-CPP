@@ -57,8 +57,11 @@ void Map::calcQuant(const QList<Vector> &input)
         for(int j = 0; j < network[i].size(); ++j)
         {
             int qs = network[i][j]->quant_list.size();
-            if(qs > 0) network[i][j]->quant /= qs;
-            mqe += network[i][j]->quant;
+            if(qs > 0)
+            {
+                network[i][j]->quant /= qs;
+                mqe += network[i][j]->quant;
+            }
         }
     }
     mqe /= network.size() * network[0].size();
@@ -67,6 +70,7 @@ void Map::calcQuant(const QList<Vector> &input)
 void Map::train(const QList<Vector> &input, int max_iterations)
 {
     input_size = input.size();
+    int sub_soms = 0;
     calcMean(input);
     for(;;)
     {
@@ -74,7 +78,8 @@ void Map::train(const QList<Vector> &input, int max_iterations)
         for(int i = 0; i < lambda; ++i)
         {
             iteration++;
-            //if(iteration % 2 == 0) cout << "iteration: " << i << endl;
+            if(iteration % (lambda/2) == 0) cout << "itr: " << iteration  << " [" << network.size() << ", " << network[0].size() << "]  "
+                                                 << sub_soms << "  => " << input_size << endl;
             float my_alpha = alpha();
             for(int j = 0; j < input_size; ++j) learn(input[j], my_alpha);
         }
@@ -93,11 +98,12 @@ void Map::train(const QList<Vector> &input, int max_iterations)
                 }
             }
         }
-        if(mqe > tau_1 * mqe0)
+        if(mqe0 > 0 && mqe > tau_1 * mqe0)
             grow();
         else
         {
             int n = markAllHierarchyUnits();
+            sub_soms += n;
             if(n < 1) break;
         }
     }
