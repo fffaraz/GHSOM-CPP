@@ -40,6 +40,6 @@ void GUI::cellDoubleClicked(int r, int c)
 {
     if(map->network[r][c]->has_map)
         new GUI(map->network[r][c]->map, false, 0, 0, this);
-    else
+    else if(map->network[r][c]->quant_names.size() > 0)
         new GUI(map, true, r, c, this);
 }
