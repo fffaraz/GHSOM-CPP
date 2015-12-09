@@ -1,11 +1,11 @@
 #include "gui.h"
 
-GUI::GUI(Map *map, bool list, int x, int y, QObject *parent) : QObject(parent), map(map)
+GUI::GUI(Map *map, bool islist, int x, int y, QObject *parent) : QObject(parent), map(map)
 {
     QTableWidget *tw = new QTableWidget();
     tw->setEditTriggers(QAbstractItemView::NoEditTriggers);
     tw->setSelectionMode(QAbstractItemView::SingleSelection);
-    if(!list)
+    if(!islist)
     {
         QFont font;
         font.setBold(true);
