@@ -152,7 +152,7 @@ void Map::grow()
         for(int i = 0; i < network.size(); ++i) network[i].insert(e.second, newlist[i]);
         break;
     default:
-        cout << "dir =/= 0,1,2,3 !!!\n\n";
+        cout << "dir != 0,1,2,3 !!!\n\n";
         break;
     }
 }

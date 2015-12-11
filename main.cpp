@@ -13,22 +13,25 @@ void test1()
             Vector v;
             v.append(i/10.0f);
             v.append(j/10.0f);
+            v.name = QString::number(v[0], 'f', 2) + ", " + QString::number(v[1], 'f', 2);
+            v.has_name = true;
             sample.append(v);
         }
     }
-    Map map(2);
-    map.print();
-    map.train(sample);
-    map.print();
+    Map *map = new Map(2);
+    map->print();
+    map->train(sample);
+    map->print();
     cout << endl << endl;
     Vector v;
     v.append(0.1);
     v.append(0.9);
-    auto cluster = map.findRecursive(v);
+    auto cluster = map->findRecursive(v);
     for(int i = 0; i < cluster.size(); ++i)
     {
         cout << "[" << cluster[i].first << ", " << cluster[i].second << "], ";
     }
+    new GUI(map);
 }
 
 void test2()
@@ -90,6 +93,7 @@ Vector fillVector(QString flags, QString name)
 void test3()
 {
     QList<Vector> data_set;
+    /*
     data_set.append(fillVector("1 0 0 1 0 0 0 0 1 0 0 1 0", "Dove"));
     data_set.append(fillVector("1 0 0 1 0 0 0 0 1 0 0 0 0", "Chicken"));
     data_set.append(fillVector("1 0 0 1 0 0 0 0 1 0 0 0 1", "Duck"));
@@ -106,7 +110,34 @@ void test3()
     data_set.append(fillVector("0 0 1 0 1 1 1 1 0 0 1 0 0", "Horse"));
     data_set.append(fillVector("0 0 1 0 1 1 1 1 0 0 1 0 0", "Zebra"));
     data_set.append(fillVector("0 0 1 0 1 1 1 0 0 0 0 0 0", "Cow"));
-    Map *map = new Map(13);
+    */
+    // Small Medium Big 2-Legs 4-Legs Hair Scales Hooves Gills Mane Feathers Fins Hunt Run Fly Swim
+    data_set.append(fillVector("1 0 0 1 0 0 0 0 0 0 1 0 0 0 1 0", " Dove"));
+    data_set.append(fillVector("1 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0", " Chicken"));
+    data_set.append(fillVector("1 0 0 1 0 0 0 0 0 0 1 0 0 0 0 1", " Duck"));
+    data_set.append(fillVector("1 0 0 1 0 0 0 0 0 0 1 0 0 0 1 1", " Goose"));
+    data_set.append(fillVector("1 0 0 1 0 0 0 0 0 0 1 0 1 0 1 0", " Owl"));
+    data_set.append(fillVector("1 0 0 1 0 0 0 0 0 0 1 0 1 0 1 0", " Hawk"));
+    data_set.append(fillVector("0 1 0 1 0 0 0 0 0 0 1 0 1 0 1 0", " Eagle"));
+    data_set.append(fillVector("0 1 0 0 1 1 0 0 0 0 0 0 1 0 0 0", " Fox"));
+    data_set.append(fillVector("0 1 0 0 1 1 0 0 0 0 0 0 0 1 0 0", " Dog"));
+    data_set.append(fillVector("0 1 0 0 1 1 0 0 0 1 0 0 1 1 0 0", " Wolf"));
+    data_set.append(fillVector("1 0 0 0 1 1 0 0 0 0 0 0 1 0 0 0", " Cat"));
+    data_set.append(fillVector("0 0 1 0 1 1 0 0 0 0 0 0 1 1 0 0", " Tiger"));
+    data_set.append(fillVector("0 0 1 0 1 1 0 0 0 1 0 0 1 1 0 0", " Lion"));
+    data_set.append(fillVector("0 0 1 0 1 1 0 1 0 1 0 0 0 1 0 0", " Horse"));
+    data_set.append(fillVector("0 0 1 0 1 1 0 1 0 1 0 0 0 1 0 0", " Zebra"));
+    data_set.append(fillVector("0 0 1 0 1 1 0 1 0 0 0 0 0 0 0 0", " Cow"));
+    data_set.append(fillVector("1 0 0 0 1 0 1 0 0 0 0 0 1 0 0 0", " Lizard"));
+    data_set.append(fillVector("0 1 0 0 0 0 1 0 0 0 0 0 1 0 0 1", " Snake"));
+    data_set.append(fillVector("0 0 0 0 1 0 1 0 0 0 0 0 1 0 0 1", " Crocodile"));
+    data_set.append(fillVector("1 0 0 0 1 0 1 0 0 0 0 0 0 0 0 1", " Turtle"));
+    data_set.append(fillVector("1 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0", " Tortoise"));
+    data_set.append(fillVector("1 0 0 0 0 0 1 0 1 0 0 1 0 0 0 1", " Bass"));
+    data_set.append(fillVector("0 1 0 0 0 0 1 0 1 0 0 1 1 0 0 1", " Trout"));
+    data_set.append(fillVector("0 0 1 0 0 0 0 0 1 0 0 1 1 0 0 1", " Shark"));
+    data_set.append(fillVector("0 0 1 0 0 0 0 0 0 0 0 1 1 0 0 1", " Dolphin"));
+    Map *map = new Map(16);
     map->train(data_set);
     map->print();
     new GUI(map);
@@ -117,8 +148,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     test3();
-    cout << endl;
-    cout.flush();
 
+    cout.flush();
     return a.exec();
 }
