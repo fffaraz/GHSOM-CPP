@@ -28,8 +28,11 @@ QMAKE_LFLAGS_RELEASE   *= -O3
 #QMAKE_CXXFLAGS_RELEASE += -O2
 #QMAKE_LFLAGS_RELEASE   += -O2
 
-msvc:QMAKE_CXXFLAGS_RELEASE += /O2 /openmp /arch:AVX
-gcc:QMAKE_CXXFLAGS_RELEASE += -O3 -march=native -fopenmp -D_GLIBCXX_PARALLEL
+gcc:QMAKE_CXXFLAGS_RELEASE += -ffast-math
+msvc:QMAKE_CXXFLAGS_RELEASE += /fp:fast
+
+gcc:QMAKE_CXXFLAGS_RELEASE += -O3 -march=native # -fopenmp -D_GLIBCXX_PARALLEL
+msvc:QMAKE_CXXFLAGS_RELEASE += /O2 /arch:AVX # /openmp 
 
 SOURCES += main.cpp \
     neuron.cpp \
