@@ -44,4 +44,5 @@ HEADERS += \
     map.h \
     common.h \
     vector.h \
-    gui.h
+    gui.h \
+    tests.h
