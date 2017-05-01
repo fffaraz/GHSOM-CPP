@@ -2,7 +2,7 @@
 
 float Vector::distanceTo(const Vector &other) const
 {
-    if(this->size() != other.size()) return -1;
+    if(this->size() != other.size()) return -1; // FIXME
     float res = 0;
     for (int i = 0; i < this->size(); ++i)
     {
